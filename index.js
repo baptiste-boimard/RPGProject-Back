@@ -1,7 +1,10 @@
+const debug = require('debug')('SERVER')
+
 const express = require('express')
 const app = express();
 
 const router = require('./app/routers/router')
+const handleError = require('./app/handlers/handleError');
 
 const PORT = 3333;
 
@@ -17,6 +20,9 @@ app.use((req ,res ,next) => {
 app.use(router);
 app.use(express.static('docs'));
 
+//==--Middleware to catch error--==
+app.use(handleError);
+
 app.listen(PORT, () => {
-  console.log(`Listening on http://localhost:${PORT}`);
+  debug(`Listening on http://localhost:${PORT}`);
 });

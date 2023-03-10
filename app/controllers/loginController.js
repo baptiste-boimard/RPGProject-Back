@@ -13,12 +13,13 @@ const loginController =  {
    * @returns {Object} Return response to login
    */
   async login(req,res,next) {
-    console.log(req.body);
     if(req.body.email == 'dd@dd' && req.body.password == 'dd') {
       const user = 'coucou';
       res.json({user});
+    } else {
+      const err = new Error('Mauvais truc')
+      next(err);
     }
-    // next();
   }
 };
 

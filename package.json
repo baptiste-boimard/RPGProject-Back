@@ -1,0 +1,25 @@
+{
+  "name": "rpgproject-back",
+  "version": "0.0.1",
+  "description": "back party of the RPGProject",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baptiste-boimard/RPGProject-back.git"
+  },
+  "author": "Punky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baptiste-boimard/RPGProject-back/issues"
+  },
+  "homepage": "https://github.com/baptiste-boimard/RPGProject-back#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21"
+  }
+}

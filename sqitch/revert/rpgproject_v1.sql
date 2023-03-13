@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS user;
+-- Nothing DB cannot be drop !!
 
 COMMIT;

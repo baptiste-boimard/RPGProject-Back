@@ -11,4 +11,4 @@ createdb rpgproject --owner rpgproject
 sqitch init rpgproject_sqitch --engine pg # on indique qu'on travaille avec postgres (pg)
 
 # 4. Je crèe une version 1 pour ma BDD
-sqitch add rpgproject_v1 -n "Create Table"
+sqitch add rpgproject_v1 -n "Create DB"

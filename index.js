@@ -1,3 +1,4 @@
+require('dotenv').config();
 const debug = require('debug')('SERVER')
 
 const express = require('express')
@@ -6,7 +7,7 @@ const app = express();
 const router = require('./app/routers/router')
 const handleError = require('./app/handlers/handleError');
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3030;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

@@ -1,3 +1,6 @@
+require('dotenv').config();
+const {dataMapperUser} = require('../models/dataMapper');
+const bcrypt = require('bcrypt');
 
 /**
  * @type {Object}
@@ -5,7 +8,6 @@
  * @namespace adminController
  */
 const loginController =  {
-
 
   /** The method allows you to log as an user
    * @memberof loginController
@@ -33,6 +35,19 @@ const loginController =  {
    * @returns {Object} Return response to signup
    */
   async signup(req,res,next) {
+
+    if(req.body.email ==='' || req.body.password ==='') {
+      const err = new Error('Veuillez remplir tous les champs');
+      err.status = 406;
+      next(err);
+    }
+    const existingUser = await dataMapperUser.getOneUser(req.body.email);
+    if(existingUser.email === req.body.email) {
+      const err = new Error('Un utilisateur avec cet email existe déjà');
+      next(err);
+    }
+
+
     console.log(req.body);
     if(req.body.email == 'dd@dd' && req.body.password == 'dd') {
       const user = 'coucou';

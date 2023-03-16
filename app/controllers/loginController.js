@@ -42,21 +42,24 @@ const loginController =  {
       next(err);
     }
     const existingUser = await dataMapperUser.getOneUser(req.body.email);
-    if(existingUser.email === req.body.email) {
+    if(existingUser) {
       const err = new Error('Un utilisateur avec cet email existe déjà');
       next(err);
-    }
-
-
-    console.log(req.body);
-    if(req.body.email == 'dd@dd' && req.body.password == 'dd') {
-      const user = 'coucou';
-      res.json({user});
     } else {
-      const err = new Error('Mauvais truc')
-      next(err);
+      console.log('info', req.body.email, req.body.password);
+      const userSignup = await dataMapperUser.userSignup(
+          req.body.email,
+          await bcrypt.hash(req.body.password, 10),
+        );
+      res 
+        .status(200)
+        .send('Votre compte est créé, vous pouvez vous connecter');
+      if(!userSignup) {
+          const err = new Error('Votre inscription a rencontrée un problème, veuillez recommencer');
+          next(err);
+        }
     }
-  }
+  },
 };
 
 module.exports = loginController;

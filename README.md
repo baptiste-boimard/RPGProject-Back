@@ -4,3 +4,4 @@ debug => permet de créer de messages en console personnalisés
 bcrypt => hashage du mot de passe avant de le rentrer ds la bdd
 dotenv => charge les variables d'environnemen dans un ficher .env
 pg => postgres 
+jsonwebtoken => envoi un token au front contenant des infos voulues

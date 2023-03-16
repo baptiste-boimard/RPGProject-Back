@@ -15,14 +15,14 @@ const datamapper = {
       values: [email],
     };
     const data = await client.query(query);
-    return data.rowCount;
+    return data.rows[0];
   },
   /**
    * @memberof datamapper
    * @method userSignup
    * @param {String} email 
    * @param {String} hashPassword 
-   * @returns {Boolean} insert is ok or not
+   * @returns {Boolean} insert is ok or
    */
   async userSignup(email, hashPassword) {
     const query = {
@@ -33,7 +33,6 @@ const datamapper = {
       values: [email, hashPassword],
     };
     const data = await client.query(query);
-    console.log(data.rowCount);
     return data.rowCount;
   },
 };

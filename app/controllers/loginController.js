@@ -1,6 +1,8 @@
 require('dotenv').config();
-const {dataMapperUser} = require('../models/dataMapper');
 const bcrypt = require('bcrypt');
+const jwt = require(`jsonwebtoken`);
+const {dataMapperUser} = require('../models/dataMapper');
+
 
 /**
  * @type {Object}
@@ -17,13 +19,26 @@ const loginController =  {
    * @returns {Object} Return response to login
    */
   async login(req,res,next) {
-    console.log(req.body);
-    if(req.body.email == 'dd@dd' && req.body.password == 'dd') {
-      const user = 'coucou';
-      res.json({user});
-    } else {
-      const err = new Error('Mauvais truc')
+    const existingUser = await dataMapperUser.getOneUser(req.body.email);
+    if(!existingUser) {
+      const err = new Error('L\'utilisateur et/ou le mot de passe sont incorrects');
       next(err);
+    } else {
+      // const match = await bcrypt.compare(
+      //   req.body.password,
+      //   existingUser.password,
+      // );
+      if(req.body.password === existingUser.password) {
+        const user = {email: req.body.email};
+        const userID = existingUser.id;
+        const accessToken = jwt.sign(user,
+                                    process.env.JWT_SECRET,
+                                    {expiresIn : process.env.JWT_EXPIRES_IN});
+        res.json({accessToken, userID});
+      } else {
+        const err = new Error('L\'utilisateur et/ou le mot de passe sont incorrects');
+        next(err);
+      }
     }
   },
 
@@ -46,7 +61,6 @@ const loginController =  {
       const err = new Error('Un utilisateur avec cet email existe déjà');
       next(err);
     } else {
-      console.log('info', req.body.email, req.body.password);
       const userSignup = await dataMapperUser.userSignup(
           req.body.email,
           await bcrypt.hash(req.body.password, 10),

@@ -1,12 +1,27 @@
 const express = require('express');
 
-const router = express.Router();
-
 const routerWrapper = require('../handlers/routerWrapper');
+
 const loginController = require('../controllers/loginController');
 
+const {
+  schemaCreateUser,
+} = require('../validation/schema');
+
+const {
+  validateCreateUser,
+} = require('../validation/validations');
+
+const router = express.Router();
+
+router.post(
+  '/signup',
+  validateCreateUser(schemaCreateUser),
+  routerWrapper(loginController.signup),
+  );
+
+
 router.post('/login', routerWrapper(loginController.login));
-router.post('/signup', routerWrapper(loginController.signup));
 
 
 module.exports = router;

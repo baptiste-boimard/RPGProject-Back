@@ -24,11 +24,11 @@ const loginController =  {
       const err = new Error('L\'utilisateur et/ou le mot de passe sont incorrects');
       next(err);
     } else {
-      // const match = await bcrypt.compare(
-      //   req.body.password,
-      //   existingUser.password,
-      // );
-      if(req.body.password === existingUser.password) {
+      const match = await bcrypt.compare(
+        req.body.password,
+        existingUser.password,
+      );
+      if(match) {
         const user = {email: req.body.email};
         const userID = existingUser.id;
         const accessToken = jwt.sign(user,

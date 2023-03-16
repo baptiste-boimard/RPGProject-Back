@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+-- No verify because no table existing
 
 ROLLBACK;

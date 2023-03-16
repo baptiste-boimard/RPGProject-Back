@@ -2,6 +2,7 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT "id","email","password" FROM "user";
 
 ROLLBACK;
+git add .

@@ -14,6 +14,7 @@ const datamapper = {
       values: [email],
     };
     const data = await client.query(query);
+    console.log(data.row[0]);
     return data.row[0];
   },
 };

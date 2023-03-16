@@ -1,4 +1,4 @@
 # sqitch add rpgproject -n "création des tables"
 
 
-sqitch add rpgproject_V2 -n "Create user table"
+sqitch add rpgproject_V3 -n "Create 2 users"
